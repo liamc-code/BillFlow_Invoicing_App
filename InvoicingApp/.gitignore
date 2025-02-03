@@ -1,0 +1,30 @@
+﻿# Ignore Visual Studio-specific files
+.vs/
+*.user
+*.suo
+*.vcxproj.user
+*.vscode/
+
+# Ignore build outputs
+bin/
+obj/
+**/bin/
+**/obj/
+**/TestResults/
+*.log
+
+# Ignore package dependencies
+packages/
+npm-debug.log
+yarn.lock
+node_modules/
+
+# Ignore user secrets
+appsettings.json
+appsettings.Development.json
+
+# Ignore EF Core migrations (users can generate their own)
+Migrations/
+
+# Ignore Publish outputs
+PublishProfiles/
