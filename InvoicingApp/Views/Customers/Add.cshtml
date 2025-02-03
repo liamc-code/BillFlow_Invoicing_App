@@ -1,0 +1,18 @@
+﻿@*
+    Form for creating new customer
+*@
+
+@model Invoicing.Entities.Customer
+
+@{
+    var group = (string)ViewContext.RouteData.Values["group"] ?? "A-E";
+    ViewData["Group"] = group;
+}
+
+<h1>Add Customer</h1>
+
+<form asp-controller="Customers" asp-action="Add" asp-route-group="@ViewData["Group"]" method="post" enctype="application/x-www-form-urlencoded">
+    @Html.AntiForgeryToken()
+    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+    @await Html.PartialAsync("_CustomerForm", Model) 
+</form>

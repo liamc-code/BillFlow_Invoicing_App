@@ -1,0 +1,128 @@
+﻿@*
+    Partial view to support form of Add/Edit for Customer
+*@
+@model Invoicing.Entities.Customer
+
+<div class="form-group row" style="margin-bottom: 10px">
+    <div class="col-sm-2">
+        <label>Name:</label>
+    </div>
+    <div class="col-sm-4">
+        <input type="text" asp-for="Name" class="form-control 
+            @(ViewData.ModelState["Name"]?.Errors.Any() == true ? "is-invalid" : "")" />
+    </div>
+    <div class="col">
+        <span asp-validation-for="Name" class="text-bg-danger"></span>
+    </div>
+</div>
+<div class="form-group row" style="margin-bottom: 10px">
+    <div class="col-sm-2">
+        <label>Address 1:</label>
+    </div>
+    <div class="col-sm-4">
+        <input type="text" asp-for="Address1" class="form-control 
+            @(ViewData.ModelState["Address1"]?.Errors.Any() == true ? "is-invalid" : "")" />
+    </div>
+    <div class="col">
+        <span asp-validation-for="Address1" class="text-bg-danger"></span>
+    </div>
+</div>
+<div class="form-group row" style="margin-bottom: 10px">
+    <div class="col-sm-2">
+        <label>Address 2:</label>
+    </div>
+    <div class="col-sm-4">
+        <input type="text" asp-for="Address2" class="form-control" />
+    </div>
+    <div class="col">
+        <span asp-validation-for="Address2" class="text-bg-danger"></span>
+    </div>
+</div>
+<div class="form-group row" style="margin-bottom: 10px">
+    <div class="col-sm-2">
+        <label>City:</label>
+    </div>
+    <div class="col-sm-4">
+        <input type="text" asp-for="City" class="form-control 
+            @(ViewData.ModelState["City"]?.Errors.Any() == true ? "is-invalid" : "")" />
+    </div>
+    <div class="col">
+        <span asp-validation-for="City" class="text-bg-danger"></span>
+    </div>
+</div>
+<div class="form-group row" style="margin-bottom: 10px">
+    <div class="col-sm-2">
+        <label>Province/State:</label>
+    </div>
+    <div class="col-sm-4">
+        <input type="text" asp-for="ProvinceOrState" class="form-control 
+            @(ViewData.ModelState["ProvinceOrState"]?.Errors.Any() == true ? "is-invalid" : "")" />
+    </div>
+    <div class="col">
+        <span asp-validation-for="ProvinceOrState" class="text-bg-danger"></span>
+    </div>
+</div>
+<div class="form-group row" style="margin-bottom: 10px">
+    <div class="col-sm-2">
+        <label>Zip/postal code:</label>
+    </div>
+    <div class="col-sm-4">
+        <input type="text" asp-for="ZipOrPostalCode" class="form-control 
+            @(ViewData.ModelState["ZipOrPostalCode"]?.Errors.Any() == true ? "is-invalid" : "")" />
+    </div>
+    <div class="col">
+        <span asp-validation-for="ZipOrPostalCode" class="text-bg-danger"></span>
+    </div>
+</div>
+<div class="form-group row" style="margin-bottom: 10px">
+    <div class="col-sm-2">
+        <label>Phone:</label>
+    </div>
+    <div class="col-sm-4">
+        <input type="text" asp-for="Phone" class="form-control 
+            @(ViewData.ModelState["Phone"]?.Errors.Any() == true ? "is-invalid" : "")" />
+    </div>
+    <div class="col">
+        <span asp-validation-for="Phone" class="text-bg-danger"></span>
+    </div>
+</div>
+<div class="form-group row" style="margin-bottom: 10px">
+    <div class="col-sm-2">
+        <label>Contact first name:</label>
+    </div>
+    <div class="col-sm-4">
+        <input type="text" asp-for="ContactFirstName" class="form-control" />
+    </div>
+    <div class="col">
+        <span asp-validation-for="ContactFirstName" class="text-bg-danger"></span>
+    </div>
+</div>
+<div class="form-group row" style="margin-bottom: 10px">
+    <div class="col-sm-2">
+        <label>Contact last name:</label>
+    </div>
+    <div class="col-sm-4">
+        <input type="text" asp-for="ContactLastName" class="form-control" />
+    </div>
+    <div class="col">
+        <span asp-validation-for="ContactLastName" class="text-bg-danger"></span>
+    </div>
+</div>
+<div class="form-group row" style="margin-bottom: 10px">
+    <div class="col-sm-2">
+        <label>Contact email:</label>
+    </div>
+    <div class="col-sm-4">
+        <input type="text" asp-for="ContactEmail" class="form-control 
+            @(ViewData.ModelState["ContactEmail"]?.Errors.Any() == true ? "is-invalid" : "")" />
+    </div>
+    <div class="col">
+        <span asp-validation-for="ContactEmail" class="text-bg-danger"></span>
+    </div>
+    <div class="row" style="margin-bottom: 10px">
+        <div class="offset-sm=2 col-sm-4">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a asp-action="AllCustomers" asp-route-group="@ViewData["Group"]" class="btn btn-secondary">Cancel</a> 
+        </div>
+    </div>
+</div>

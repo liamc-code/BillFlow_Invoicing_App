@@ -1,0 +1,79 @@
+﻿@*
+    View of all customers based on customer grouping.
+    Actions for Adding, Editing, Deleting, Invoices
+    of Customers.
+*@
+
+@model IEnumerable<Invoicing.Entities.Customer>
+
+@{
+    ViewBag.Title = "Customers";
+}
+
+<h1>Customers</h1>
+
+<p>
+    <a asp-action="Add" asp-route-group="@ViewBag.Group">Add New Customer</a>
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var customer in Model)
+        {
+            <tr>
+                <td>@customer.Name</td>
+                <td>@customer.Address1</td>
+                <td>
+                    <a asp-controller="Invoices" asp-action="AllInvoices" asp-route-customerId="@customer.CustomerId" asp-route-group="@ViewBag.Group">
+                        Invoices
+                    </a>
+                    |
+                    <a asp-action="Edit" asp-route-id="@customer.CustomerId" asp-route-group="@ViewBag.Group">Edit</a>
+                    |
+                    <a asp-action="Delete" asp-route-id="@customer.CustomerId" asp-route-group="@ViewBag.Group">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (TempData["UndoCustomerId"] != null && TempData["UndoCustomerName"] != null)
+{
+    <div>
+        The Customer "@TempData["UndoCustomerName"]" was deleted. 
+        <a asp-action="UndoDelete" asp-route-group="@ViewBag.Group" asp-route-id="@TempData["UndoCustomerId"]">
+            Undo
+        </a>
+        this delete.
+    </div>
+    
+}
+<input type="hidden" id="undoCustomerId" value="@TempData["UndoCustomerId"]" />
+
+<table>
+    <tr>
+        @foreach (var group in new[] { "A-E", "F-K", "L-R", "S-Z" })
+        {
+            <td style="padding: 10px; text-align: center;">
+                <a asp-action="AllCustomers" asp-route-group="@group"
+                   style="display: inline-block; padding: 8px 16px; color: white;
+                          text-decoration: none; border-radius: 4px;
+                          background-color: @(ViewBag.Group == group ? "blue" : "gray");">
+                    @group
+                </a>
+            </td>
+        }
+    </tr>
+</table>
+
+
+
+
+

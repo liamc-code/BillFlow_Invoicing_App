@@ -1,0 +1,12 @@
+﻿@*
+    Entry point into application for user.
+*@
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <a asp-controller="Customers" asp-action="AllCustomers" asp-route-group="A-E">View all Customers</a>
+</div>

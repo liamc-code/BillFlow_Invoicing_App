@@ -1,0 +1,21 @@
+﻿@*
+    Form to edit existing customer
+*@
+
+@model Invoicing.Entities.Customer
+
+@{
+    var group = (string)ViewContext.RouteData.Values["group"] ?? "A-E";
+    ViewData["Group"] = group;
+}
+
+<h1>Edit Customer</h1>
+
+
+<form asp-controller="Customers" asp-action="Edit" asp-route-group="@ViewData["Group"]" method="post" enctype="application/x-www-form-urlencoded">
+    @Html.AntiForgeryToken()
+    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+    <input type="hidden" asp-for="CustomerId" />
+    @await Html.PartialAsync("_CustomerForm", Model)
+</form>
+

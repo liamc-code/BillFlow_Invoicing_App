@@ -1,0 +1,132 @@
+﻿@*
+    Invoice and Invoice Line Item view for specific customer
+*@
+
+@model IEnumerable<Invoicing.Entities.Invoice>
+
+@{
+    ViewBag.Title = $"Invoices for {ViewBag.CustomerName}";
+    var selectedInvoiceId = ViewBag.SelectedInvoiceId as int? ?? Model.FirstOrDefault()?.InvoiceId;
+    var selectedInvoice = Model.FirstOrDefault(i => i.InvoiceId == selectedInvoiceId);
+}
+
+<h1>Invoices for @ViewBag.CustomerName</h1>
+
+<div>
+    <a asp-action="AllCustomers" asp-controller="Customers" asp-route-group="@ViewBag.Group">
+        Return to @ViewBag.Group customers
+    </a>
+</div>
+
+<p>Address: @ViewBag.CustomerAddress @ViewBag.CustomerCity</p>
+<p>
+    Terms: @(ViewBag.CustomerTerms?.EndsWith("days") == true ? ViewBag.CustomerTerms : $"{ViewBag.CustomerTerms} days")
+</p>
+
+
+
+<div class="row">
+    <!-- Invoices Table -->
+    <div class="col-md-6">
+        <h4>Invoices</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Invoice #</th>
+                    <th>Due Date</th>
+                    <th>Amount Paid</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var invoice in Model)
+                {
+                    <tr class="@(invoice.InvoiceId == selectedInvoiceId ? "table-primary" : "")">
+                        <td>
+                            <a asp-action="AllInvoices" 
+                               asp-route-customerId="@ViewBag.CustomerId" 
+                               asp-route-group="@ViewBag.Group" 
+                               asp-route-selectedInvoiceId="@invoice.InvoiceId">
+                               @invoice.InvoiceId
+                            </a>
+                        </td>
+                        <td>@invoice.InvoiceDueDate?.ToShortDateString()</td>
+                        <td>@invoice.LineItems.Sum(item => item.Amount ?? 0).ToString("C")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <!-- Add Invoice Form -->
+        <form asp-action="AddInvoice" asp-controller="Invoices" method="post">
+            <input type="hidden" name="customerId" value="@ViewBag.CustomerId" />
+            <input type="hidden" name="group" value="@ViewBag.Group" />
+            <div class="form-group">
+                <label for="InvoiceDate">Date:</label>
+                <input type="date" id="InvoiceDate" name="InvoiceDate" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="PaymentTermsId">Terms:</label>
+                <select id="PaymentTermsId" name="PaymentTermsId" class="form-control">
+                    @foreach (var term in ViewBag.PaymentTerms as List<Invoicing.Entities.PaymentTerms>)
+                    {
+                        if (term.PaymentTermsId == ViewBag.CurrentPaymentTermsId)
+                        {
+                            <option value="@term.PaymentTermsId" selected>
+                                @(term.Description.EndsWith("days") ? term.Description : $"{term.Description} days")
+                            </option>
+                        }
+                        else
+                        {
+                            <option value="@term.PaymentTermsId">
+                                @(term.Description.EndsWith("days") ? term.Description : $"{term.Description} days")
+                            </option>
+                        }
+                    }
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Invoice</button>
+        </form>
+    </div>
+
+    <!-- Line Items for Selected Invoice -->
+    <div class="col-md-6">
+        @if (selectedInvoice != null)
+        {
+            <h4>Line Items for Invoice #@selectedInvoice.InvoiceId</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in selectedInvoice.LineItems)
+                    {
+                        <tr>
+                            <td>@item.Description</td>
+                            <td>@item.Amount?.ToString("C")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <p><strong>Total:</strong> @selectedInvoice.LineItems.Sum(i => i.Amount ?? 0).ToString("C")</p>
+        }
+
+        <!-- Add Line Item Form -->
+        <h4>Add Line Item</h4>
+        <form asp-action="AddLineItem" asp-controller="Invoices" method="post">
+            <input type="hidden" name="InvoiceId" value="@ViewBag.SelectedInvoiceId" />
+            <input type="hidden" name="group" value="@ViewBag.Group" />
+            <div class="form-group">
+                <label for="Description">Description:</label>
+                <input type="text" id="Description" name="Description" class="form-control" required/>
+            </div>
+            <div class="form-group">
+                <label for="Amount">Amount:</label>
+                <input type="number" id="Amount" name="Amount" step="0.01" class="form-control" required/>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Line Item</button>
+        </form>
+    </div>
+</div>
