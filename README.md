@@ -57,7 +57,7 @@ BillFlow Invoicing App is a web-based ASP.NET MVC application designed to manage
    dotnet run
    ```
 
-6. Open your browser and navigate to `http://localhost:5000` to access the application.
+6. Open your browser and navigate to `http://localhost:7100` to access the application.
 
 ## Usage
 
