@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Invoicing", "Invoicing\Invo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InvoicingApp", "InvoicingApp\InvoicingApp.csproj", "{BA827B81-C584-44CD-A15D-F4D98D0DAEEA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Invoicing.Tests", "Invoicing.Tests\Invoicing.Tests.csproj", "{4E13F33A-2096-4367-8515-8870A59F9D45}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Invoicing.Tests", "Invoicing.Tests\Invoicing.Tests.csproj", "{4E13F33A-2096-4367-8515-8870A59F9D45}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
