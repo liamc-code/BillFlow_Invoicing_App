@@ -1,7 +1,7 @@
 
 # BillFlow Invoicing App
 
-BillFlow Invoicing App is a web-based ASO.NET MVC application designed to manage customers and their invoices efficiently. With features like customer segmentation, validation, and line-item management, it simplifies invoicing workflows. This project also showcases CRUD operations, Entity Framework Core, and unit testing. 
+BillFlow Invoicing App is a web-based ASP.NET MVC application designed to manage customers and their invoices efficiently. With features like customer segmentation, validation, and line-item management, it simplifies invoicing workflows. This project also showcases CRUD operations, Entity Framework Core, and unit testing. 
 
 <img src="preview_images/customers_a_to_e_page.png" width="350" alt="BillFlow Preview">
 
